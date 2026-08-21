@@ -84,24 +84,26 @@
           }
 
           const dados = await resposta.json();
+          const usuario = dados.usuario;//isso tem a ver como a forma como JSON está esturturado, antes era $dados.nome, agora é $dados.usuario.nome
+
           if(usuarioEditando){
             const li = document.querySelector(
               `li[data-id="${usuarioEditando}"]`
             );
             li.innerHTML = `
-              <h2>${dados.nome}</h2>
-              <p>${dados.email}</p>
-              <button data-id="${dados.id}" class="excluir">Excluir</button>
-              <button data-id="${dados.id}" class="editar">Editar</button>
+              <h2>${usuario.nome}</h2>
+              <p>${usuario.email}</p>
+              <button data-id="${usuario.id}" class="excluir">Excluir</button>
+              <button data-id="${usuario.id}" class="editar">Editar</button>
             `;
             usuarioEditando = null;
           }else{
             lista.innerHTML += `
-              <li data-id="${dados.id}">
-                <h2>${dados.nome}</h2>
-                <p>${dados.email}</p>
-                <button data-id="${dados.id}" class="excluir">Excluir</button>
-                <button data-id="${dados.id}" class="editar">Editar</button>
+              <li data-id="${usuario.id}">
+                <h2>${usuario.nome}</h2>
+                <p>${usuario.email}</p>
+                <button data-id="${usuario.id}" class="excluir">Excluir</button>
+                <button data-id="${usuario.id}" class="editar">Editar</button>
               </li>
             `;
           }
